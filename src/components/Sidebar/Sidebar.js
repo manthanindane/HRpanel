@@ -4,7 +4,7 @@ import { MdMessage } from "react-icons/md";
 import {  BiLogIn,  BiSearch, BiSolidDashboard,  } from "react-icons/bi";
 // import { BiCog } from "react-icons/bi";
 // import { AiFillHeart } from "react-icons/ai";
-import { BsCalendar2, BsClockHistory } from "react-icons/bs";
+import { BsCalendar2, BsClockHistory, BsRecord } from "react-icons/bs";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SidebarMenu";
@@ -17,11 +17,7 @@ const routes = [
     name: "Dashboard",
     icon: <BiSolidDashboard />,
   },
-  {
-    path: "/leavehistory",
-    name: "Leave History",
-    icon: <BsClockHistory />,
-  },
+
 
   {
     path: "/Notifications",
@@ -34,12 +30,12 @@ const routes = [
     name: "Calender",
     icon: <BsCalendar2 />,
   },
+
   {
-    path: "/login",
-    name: "Login",
-    icon: <BiLogIn />,
-  },
- 
+    path:"/EmployeeRecords",
+    name:"Records",
+    icon:<BsRecord/>,
+  }
  
     ];
   

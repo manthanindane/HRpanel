@@ -76,6 +76,30 @@ app.post('/api/leave', async (req, res) => {
   }
 });
 
+// Delete a leave application by ID
+app.delete('/api/leave-delete/:id', async (req, res) => {
+  try {
+    const leaveId = req.params.id;
+
+    // Find the leave application by ID
+    const leave = await EmployeeLeave.findById(leaveId);
+
+    // If the leave application doesn't exist, return an error response
+    if (!leave) {
+      return res.status(404).json({ message: 'Leave application not found.' });
+    }
+
+    // Delete the leave application from the database
+    await EmployeeLeave.findByIdAndDelete(leaveId);
+
+    res.status(200).json({ message: 'Leave application deleted successfully.' });
+  } catch (error) {
+    console.error(error); // Log the error for debugging purposes
+    res.status(500).json({ message: 'Error occurred while deleting leave application.', error: error.message });
+  }
+});
+
+
 // Get all employee leave data
 app.get('/api/leave', async (req, res) => {
   try {
@@ -102,7 +126,7 @@ app.get('/api/leave/:id', async (req, res) => {
 
     if (!employeeLeave) {
       // If leave document with the provided ID is not found, send an error response
-      return res.status(404).json({ message: 'Leave not found.' });
+      return res.status(404).json({ message: 'Leave not found.'});
     }
 
     // Send the employee leave data in the response
@@ -222,6 +246,9 @@ app.post('/api/hrlogin', async (req, res) => {
     res.status(500).json({ message: 'Error occurred while validating HR login.', error: error.message });
   }
 });
+
+
+
 
 
 // Start the server
