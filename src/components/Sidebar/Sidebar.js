@@ -19,11 +19,11 @@ const routes = [
   },
 
 
-  {
-    path: "/Notifications",
-    name: "Notifications",
-    icon: <MdMessage />,
-  },
+  // {
+  //   path: "/Notifications",
+  //   name: "Notifications",
+  //   icon: <MdMessage />,
+  // },
   
   {
     path: "/calender",

@@ -10,6 +10,7 @@ const HRDashboard = () => {
       await axios.patch(`http://localhost:8001/api/leaveStatus/${leaveId}`, {
         leaveStatus: 'Approved',
       });
+      window.location.reload();
       // Update the UI or fetch updated leave data if needed
     } catch (error) {
       console.error('Error occurred while approving leave:', error);
@@ -22,11 +23,9 @@ const HRDashboard = () => {
       const response1 = await axios.patch(firsturl, {
         leaveStatus: 'rejected',
       });
+      window.location.reload();
 
-      const secondurl = `http://localhost:8001/api/leave-delete/${leaveId}`
-      const response2 = await axios.delete(secondurl, 
-        console.log("data deleted")
-      );
+     
     } catch (error) {
       console.error('Error occurred while rejecting leave:', error);
     }
@@ -36,7 +35,7 @@ const HRDashboard = () => {
     // Fetch the leave data from the employee database
     const fetchLeaveData = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/leave');
+        const response = await axios.get('http://localhost:8001/api/leave');
         setEmployeesOnLeave(response.data);
       } catch (error) {
         console.error('Error occurred while fetching leave data:', error);
@@ -75,8 +74,9 @@ const HRDashboard = () => {
               <td>{employee.reason}</td>
               <td>
                 {employee.leaveStatus}
+                {(employee.leaveStatus!=="rejected" && employee.leaveStatus!=="Approved")?
               <div className='apprej'>
-                <button
+              <button
                   className="btnapprove"
                   onClick={() => approveLeave(employee._id)}
                 >
@@ -88,7 +88,7 @@ const HRDashboard = () => {
                 >
                   Reject
                 </button>
-                </div>
+                </div>:<div></div>}
               </td>
             </tr>
           ))}
